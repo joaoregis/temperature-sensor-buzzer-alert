@@ -114,7 +114,7 @@ void loop()
 
     float environmentTemperature = (float(analogRead(TemperatureSensor))*5/(1023))/0.01;
 
-  	environmentTemperature = (environmentTemperature - 32) / 1.8;
+    environmentTemperature = (environmentTemperature - 32) / 1.8;
   
     if (environmentTemperature >= TempCur)
     {
