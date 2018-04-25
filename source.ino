@@ -4,11 +4,8 @@
 #define COLS 3
 #define KEY_LENGTH 5
 
-// Posição do caracter da secret_key que está sendo testado
+// Posição do algarismo
 int Position = 0;
-
-// Chave secreta para destravar
-char * SECRET_KEY = "123";
 
 // Caracteres do teclado
 char Keys[ROWS][COLS] =
@@ -29,10 +26,10 @@ byte ColPins[COLS] = {6,7,8};
 Keypad keypad = Keypad(makeKeymap(Keys), RowPins, ColPins, ROWS, COLS);
 
 // Output do circuito
-int OutputToWrite = 13;
+int BuzzerOutput = 13;
 
 // Input do circuito
-int SENSOR = A0;
+int TemperatureSensor = A0;
 
 // Temperaturas
 float TempMax = 40.0;
@@ -59,7 +56,7 @@ void buzz(int targetPin)
 
 void setup() 
 {
-    pinMode(OutputToWrite, OUTPUT);
+    pinMode(BuzzerOutput, OUTPUT);
 }
 
 float decodeChar(char c)
@@ -114,11 +111,11 @@ void loop()
         TempCur = 20.0;
     }
 
-    float environmentTemperature = (float(analogRead(SENSOR))*5/(1023))/0.01;
+    float environmentTemperature = (float(analogRead(TemperatureSensor))*5/(1023))/0.01;
 
     if (environmentTemperature >= TempCur)
     {
-        buzz(OutputToWrite);
+        buzz(BuzzerOutput);
     }
 
     delay(100);
