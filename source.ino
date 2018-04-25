@@ -95,14 +95,15 @@ void loop()
         {
             // Primeiro algarismo
             TempCur = decodeChar(key);
+          	Position++;
         }
         else if (Position == 1)
         {
             // Segundo algarismo
             TempCur = TempCur * 10.0 + decodeChar(key);
+          	Position = 0;
         }
 
-        Position = 0;
     }
 
     if (TempCur > TempMax || TempCur < TempMin)
@@ -113,6 +114,8 @@ void loop()
 
     float environmentTemperature = (float(analogRead(TemperatureSensor))*5/(1023))/0.01;
 
+  	environmentTemperature = (environmentTemperature - 32) / 1.8;
+  
     if (environmentTemperature >= TempCur)
     {
         buzz(BuzzerOutput);
